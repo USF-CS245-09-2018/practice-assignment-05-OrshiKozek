@@ -1,13 +1,11 @@
 public class QuickSort implements SortingAlgorithm {
 
     @Override
-    public void sort(int[] arr) {
-        int left = 0;
-        int right = arr.length - 1;
-        quickSort(arr, left, right);
-    }
 
-    private void quickSort(int[] arr, int left, int right) {
+    public void sort(int[] arr) {
+        quickSort(arr, 0, arr.length-1);
+    }
+    public void quickSort(int[] arr, int left, int right) {
         if (left < right) {
             int p = partition(arr, left, right);
             quickSort(arr, left, p - 1);
@@ -15,29 +13,23 @@ public class QuickSort implements SortingAlgorithm {
         }
     }
 
-    private int partition (int[] arr, int left, int right){
-            int pivot = left;
-            int i = left+1;
-            int k = right;
-            while (i < k){
-                while(i < right && arr[i] <= arr[pivot]){
-                    i++;
-                }
-                while(k > i && arr[k] > arr[pivot]){
-                    k--;
-                }
+    public int partition (int[] arr, int left, int right){
+        int pivot = arr[right]; //pivot is the first element
+        int i = left - 1;
 
-                if (arr[i] < arr[pivot]) //i<k
-                    swap(arr, i, k);
-            }//while i<k
-
-            swap(arr, pivot, k);
-            return k;
+        for (int j = left; j < right; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                swap(arr, arr[i], arr[j]);
+            }
+        }
+        swap(arr, arr[i+1], arr[right]);
+        return i+1;
     }//method
 
-    public void swap(int[] arr, int first, int second){
-        int temp = arr[first];
-        arr[second] = arr[first];
-        arr[first] = temp;
+    public void swap(int[] arr, int i, int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }

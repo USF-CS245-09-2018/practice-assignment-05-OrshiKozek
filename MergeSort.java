@@ -1,10 +1,17 @@
-public class MergeSort {
+public class MergeSort implements  SortingAlgorithm{
 
-    public void sort(int[] arr, int l, int r) {
+    @Override
+    public void sort(int[] arr) {
+        int l = 0;
+        int r = arr.length -1;
+        sortHelp(arr, l, r);
+    }
+
+    public void sortHelp (int[] arr, int l, int r){
         if (l < r) {
             int m = (l + r) / 2; //generate the midpoint
-            sort(arr, l, m);//left side
-            sort(arr, m, r);//right side
+            sortHelp(arr, l, m);//left side
+            sortHelp(arr, m+1, r);//right side
             merge(arr, l, m, r);
         }
     }
