@@ -20,10 +20,10 @@ public class QuickSort implements SortingAlgorithm {
         for (int j = left; j < right; j++) {
             if (arr[j] <= pivot) {
                 i++;
-                swap(arr, arr[i], arr[j]);
+                swap(arr, i, j);
             }
         }
-        swap(arr, arr[i+1], arr[right]);
+        swap(arr, i+1, right);
         return i+1;
     }//method
 
